@@ -22,32 +22,6 @@
             overflow: hidden;
         }
 
-        /* Background Animation */
-        .background-animation {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .floating-icon {
-            position: absolute;
-            font-size: 1.5rem;
-            opacity: 0.3;
-            animation: float 6s linear infinite;
-        }
-
-        .likes { color: #ffd700; text-shadow: 0 0 8px #ffd700; }
-        .views { color: #c0c0c0; text-shadow: 0 0 8px #c0c0c0; }
-        .followers { color: #ffd700; text-shadow: 0 0 8px #ffd700; }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0.8); opacity: 0.3; }
-            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
-        }
 
         .neon-silver {
             box-shadow: 0 0 8px gold, 0 0 18px  rgb(226, 169, 24);
@@ -303,8 +277,7 @@
     </style>
 </head>
 <body>
-    <!-- Background Animation -->
-    <div class="background-animation" id="backgroundAnimation"></div>
+
 
     <!-- Contact Section -->
     <div id="contactSection">
