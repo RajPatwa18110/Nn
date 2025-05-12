@@ -15,7 +15,7 @@
             justify-content: center;
             align-items: center;
             font-family: 'Arial', sans-serif;
-            color: #e0e0e0;
+            color: #fdfcfc;
             padding: 1rem;
             margin: 0;
             position: relative;
@@ -50,34 +50,60 @@
         }
 
         .neon-silver {
-            box-shadow: 0 0 8px #c0c0c0, 0 0 16px #c0c0c0;
+            box-shadow: 0 0 8px gold, 0 0 18px  rgb(226, 169, 24);
             transition: all 0.3s ease;
         }
 
         .neon-silver:hover {
+            color: rgb(1, 151, 252);
             transform: scale(1.05);
-            box-shadow: 0 0 12px #c0c0c0, 0 0 24px #c0c0c0;
+            box-shadow: 0 0 12px goldenrod, 0 0 22px #f8f6f6;
         }
 
         .neon-green {
-            box-shadow: 0 0 8px #00ff00, 0 0 16px #00ff00;
+            background-color:#04ff2e;
+            box-shadow: 0 0 12px #00ff00, 0 0 24px #00ff00;
+            transition: all 0.3s ease;
+            color: rgb(0, 0, 0);
         }
 
         .neon-pink {
-            box-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff;
+             color: rgb(2, 2, 2);
+            background-color:#ff00ff;
+            box-shadow: 0 0 12px #ff00ff, 0 0 24px #ff00ff;
+            transition: all 0.3s ease;
         }
 
         .social-btn {
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            display: block;
+            text-decoration: none;
+            transform: translateY(30px) scale(0.8);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            width: 220px;
+            padding: 1rem;
+            border-radius: 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 0.5rem auto;
         }
 
         .social-btn.show {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+        }
+
+        .social-btn:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .social-btn i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
         }
 
         .text-shadow-neon {
@@ -200,7 +226,7 @@
             border-radius: 0.75rem;
             background: #3a3a3a;
             color: #e0e0e0;
-            wyśc: 1rem;
+            font-size: 1rem;
             box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.4);
         }
 
@@ -267,6 +293,12 @@
             h2 {
                 font-size: 1.5rem;
             }
+
+            .social-btn {
+                width: 180px;
+                padding: 0.75rem;
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
@@ -284,8 +316,12 @@
             <button id="boostBtn" class="btn-primary neon-silver">Boost Now</button>
         </div>
         <div id="socialButtons" style="margin-top: 1.5rem; display: none;">
-            <a href="https://wa.me/9779826660865?text=Hello%2C%20I%20want%20to%20boost%20my%20social%20media" target="_blank" class="social-btn w-48 mx-auto py-2 text-white bg-emerald-600 rounded-full">WhatsApp</a>
-            <a href="https://www.instagram.com/cheapest_booster" target="_blank" class="social-btn w-48 mx-auto py-2 text-white bg-rose-600 rounded-full">Instagram</a>
+            <a href="https://wa.me/9779826660865?text=Hello%2C%20I%20want%20to%20boost%20my%20social%20media" target="_blank" class="social-btn text-white bg-gradient-to-r from-green-500 to-emerald-600 neon-green">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="https://www.instagram.com/cheapest_booster" target="_blank" class="social-btn text-white bg-gradient-to-r from-pink-500 to-rose-600 neon-pink">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
         </div>
     </div>
 
@@ -427,37 +463,14 @@
                 socialBtns.forEach((btn, index) => {
                     setTimeout(() => {
                         btn.classList.toggle('show', socialButtons.style.display === 'block');
-                        if (socialButtons.style.display === 'block') {
-                            if (index === 0) {
-                                btn.classList.add('neon-green');
-                                btn.classList.remove('bg-emerald-600');
-                            } else {
-                                btn.classList.add('neon-pink');
-                                btn.classList.remove('bg-rose-600');
-                            }
-                        } else {
-                            btn.classList.remove('neon-green', 'neon-pink');
-                            if (index === 0) {
-                                btn.classList.add('bg-emerald-600');
-                            } else {
-                                btn.classList.add('bg-rose-600');
-                            }
-                        }
-                    }, index * 100);
+                    }, index * 150);
                 });
             });
 
             document.addEventListener('click', (e) => {
                 if (!socialButtons.contains(e.target) && !contactBtn.contains(e.target) && socialButtons.style.display === 'block') {
                     socialButtons.style.display = 'none';
-                    socialBtns.forEach((btn, index) => {
-                        btn.classList.remove('show', 'neon-green', 'neon-pink');
-                        if (index === 0) {
-                            btn.classList.add('bg-emerald-600');
-                        } else {
-                            btn.classList.add('bg-rose-600');
-                        }
-                    });
+                    socialBtns.forEach(btn => btn.classList.remove('show'));
                 }
             });
 
