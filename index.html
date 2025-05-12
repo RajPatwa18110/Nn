@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GS Tech Contact Page</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="./assets/tiktok-logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap" rel="stylesheet">
+    <title>GS Tech Social Media Booster</title>
     <style>
         body {
             background: linear-gradient(135deg, #1a1a1a, #000000);
@@ -13,23 +15,64 @@
             justify-content: center;
             align-items: center;
             font-family: 'Arial', sans-serif;
+            color: #e0e0e0;
+            padding: 1rem;
+            margin: 0;
+            position: relative;
             overflow: hidden;
         }
 
+        /* Background Animation */
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.3;
+            animation: float 6s linear infinite;
+        }
+
+        .likes { color: #ffd700; text-shadow: 0 0 8px #ffd700; }
+        .views { color: #c0c0c0; text-shadow: 0 0 8px #c0c0c0; }
+        .followers { color: #ffd700; text-shadow: 0 0 8px #ffd700; }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.8); opacity: 0.3; }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+        }
+
         .neon-silver {
-            box-shadow: 0 0 10px #c0c0c0, 0 0 20px #c0c0c0, 0 0 30px #c0c0c0;
+            box-shadow: 0 0 8px #c0c0c0, 0 0 16px #c0c0c0;
             transition: all 0.3s ease;
         }
 
-        .contact-btn:hover {
+        .neon-silver:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 15px #c0c0c0, 0 0 30px #c0c0c0, 0 0 45px #c0c0c0;
+            box-shadow: 0 0 12px #c0c0c0, 0 0 24px #c0c0c0;
+        }
+
+        .neon-green {
+            box-shadow: 0 0 8px #00ff00, 0 0 16px #00ff00;
+        }
+
+        .neon-pink {
+            box-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff;
         }
 
         .social-btn {
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.3s ease;
+            display: block;
+            text-align: center;
         }
 
         .social-btn.show {
@@ -37,81 +80,506 @@
             transform: translateY(0);
         }
 
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #c0c0c0;
-            border-radius: 50%;
-            animation: float 5s infinite;
-            pointer-events: none;
+        .text-shadow-neon {
+            text-shadow: 0 0 8px #c0c0c0;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0); opacity: 0.8; }
-            50% { opacity: 0.3; }
-            100% { transform: translateY(-100vh); opacity: 0; }
+        #contactSection {
+            text-align: center;
+            max-width: 90%;
+            margin: auto;
+            z-index: 10;
+        }
+
+        #boosterSection {
+            display: none;
+            min-height: 100vh;
+            width: 100%;
+            padding: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        #boosterSection.active {
+            display: flex;
+        }
+
+        .container {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 1rem;
+            box-shadow: 0 0 16px rgba(192, 192, 192, 0.3);
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .back-arrow {
+            font-size: 1rem;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.4rem;
+            border-radius: 50%;
+            background: linear-gradient(to right, #ff6666, #ff3333);
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-step {
+            width: 2rem;
+            height: 2rem;
+            background: #3a3a3a;
+            color: #c0c0c0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step.active {
+            background: linear-gradient(to right, #c0c0c0, #a0a0a0);
+            color: #000;
+            box-shadow: 0 0 12px #c0c0c0;
+        }
+
+        h2 {
+            color: #c0c0c0;
+            font-size: 1.75rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .option, .service-option {
+            background: #3a3a3a;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #e0e0e0;
+        }
+
+        .option:hover, .service-option:hover {
+            background: #4a4a4a;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border: none;
+            border-radius: 0.75rem;
+            background: #3a3a3a;
+            color: #e0e0e0;
+            wyśc: 1rem;
+            box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 8px #c0c0c0;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #c0c0c0, #a0a0a0);
+            color: #000;
+        }
+
+        .btn-back {
+            background: linear-gradient(to right, #ff6666, #ff3333);
+            color: #fff;
+        }
+
+        .btn-primary:hover, .btn-back:hover {
+            transform: scale(1.05);
+        }
+
+        .total-amount {
+            color: #c0c0c0;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            font-size: 1.25rem;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            button, .option, .service-option, input {
+                font-size: 0.875rem;
+                padding: 0.5rem;
+            }
+
+            .progress-step {
+                width: 1.5rem;
+                height: 1.5rem;
+                font-size: 0.75rem;
+            }
+
+            .back-arrow {
+                font-size: 0.875rem;
+                padding: 0.3rem;
+                width: 1.25rem;
+                height: 1.25rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="relative z-10 text-center">
-        <h1 class="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500 mb-4 animate-pulse">
-            GS Tech
-        </h1>
-        <p class="text-xl text-gray-400 mb-2">Since 2082</p>
-        <p class="text-lg text-gray-300 mb-8">Greetings from GS Tech! We're excited to connect with you.</p>
-        <button id="contactBtn" class="contact-btn px-8 py-4 text-xl font-semibold text-black bg-gradient-to-r from-gray-300 to-gray-500 rounded-full neon-silver focus:outline-none">
-            Contact Us
-        </button>
-        <div id="socialButtons" class="mt-6 space-y-4 hidden">
-            <a href="https://wa.me/9826660865?text=Hello%2C%20I%20want%20to%20boost%20my%20reaches%20to%20more%20people" target="_blank" class="social-btn block w-64 mx-auto px-6 py-3 text-lg font-medium text-white bg-green-500 rounded-full neon-silver hover:bg-green-600">
-                WhatsApp
-            </a>
-            <a href="https://www.instagram.com/cheapest_booster?igsh=d291MHVrMnBxZGJ3" target="_blank" class="social-btn block w-64 mx-auto px-6 py-3 text-lg font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full neon-silver hover:bg-purple-600">
-                Instagram
-            </a>
+    <!-- Background Animation -->
+    <div class="background-animation" id="backgroundAnimation"></div>
+
+    <!-- Contact Section -->
+    <div id="contactSection">
+        <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500 mb-4 text-shadow-neon">GS Tech</h1>
+        <p class="text-lg text-gray-400 mb-2">Since 2082</p>
+        <p class="text-base mb-6">Boost your social media with GS Tech!</p>
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+            <button id="contactBtn" class="btn-primary neon-silver">Contact Us</button>
+            <button id="boostBtn" class="btn-primary neon-silver">Boost Now</button>
+        </div>
+        <div id="socialButtons" style="margin-top: 1.5rem; display: none;">
+            <a href="https://wa.me/9779826660865?text=Hello%2C%20I%20want%20to%20boost%20my%20social%20media" target="_blank" class="social-btn w-48 mx-auto py-2 text-white bg-emerald-600 rounded-full">WhatsApp</a>
+            <a href="https://www.instagram.com/cheapest_booster" target="_blank" class="social-btn w-48 mx-auto py-2 text-white bg-rose-600 rounded-full">Instagram</a>
+        </div>
+    </div>
+
+    <!-- Booster Section -->
+    <div id="boosterSection">
+        <div class="container">
+            <div class="header-container">
+                <i id="backToContact" class="fas fa-arrow-left back-arrow neon-silver"></i>
+                <h2 class="text-shadow-neon">Boost Your Social Media</h2>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-step active" data-step="1">1</div>
+                <div class="progress-step" data-step="2">2</div>
+                <div class="progress-step" data-step="3">3</div>
+            </div>
+
+            <!-- Step 1: Platform Selection -->
+            <div class="step active" id="step1">
+                <p style="font-weight: bold; margin-bottom: 1rem;">Select a Platform</p>
+                <div class="option" onclick="selectPlatform('facebook')">Facebook</div>
+                <div class="option" onclick="selectPlatform('instagram')">Instagram</div>
+                <div class="option" onclick="selectPlatform('tiktok')">TikTok</div>
+                <div class="option" onclick="selectPlatform('youtube')">YouTube</div>
+            </div>
+
+            <!-- Step 2: Service Selection -->
+            <div class="step" id="step2_facebook">
+                <p style="font-weight: bold; margin-bottom: 1rem;">Facebook Boost</p>
+                <div class="service-option" onclick="selectService('facebook', 'Views - Rs.100 per 1000')">Views - Rs.100 per 1000</div>
+                <div class="service-option" onclick="selectService('facebook', 'Likes - Rs.150 per 1000')">Likes - Rs.150 per 1000</div>
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button class="btn-back neon-silver" onclick="goBackToStep1()">Back</button>
+                </div>
+            </div>
+            <div class="step" id="step2_instagram">
+                <p style="font-weight: bold; margin-bottom: 1rem;">Instagram Boost</p>
+                <div class="service-option" onclick="selectService('instagram', 'Followers - Rs.200 per 1000')">Followers - Rs.200 per 1000</div>
+                <div class="service-option" onclick="selectService('instagram', 'Likes - Rs.100 per 1000')">Likes - Rs.100 per 1000</div>
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button class="btn-back neon-silver" onclick="goBackToStep1()">Back</button>
+                </div>
+            </div>
+            <div class="step" id="step2_tiktok">
+                <p style="font-weight: bold; margin-bottom: 1rem;">TikTok Boost</p>
+                <div class="service-option" onclick="selectService('tiktok', 'Followers - Rs.500 per 1000')">Followers - Rs.500 per 1000</div>
+                <div class="service-option" onclick="selectService('tiktok', 'Likes - Rs.100 per 1000')">Likes - Rs.100 per 1000</div>
+                <div class="service-option" onclick="selectService('tiktok', 'Views - Rs.10 per 2000')">Views - Rs.10 per 2000</div>
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button class="btn-back neon-silver" onclick="goBackToStep1()">Back</button>
+                </div>
+            </div>
+            <div class="step" id="step2_youtube">
+                <p style="font-weight: bold; margin-bottom: 1rem;">YouTube Boost</p>
+                <div class="service-option" onclick="selectService('youtube', 'Subscribers - Rs.1000 per 1000')">Subscribers - Rs.1000 per 1000</div>
+                <div class="service-option" onclick="selectService('youtube', 'Likes - Rs.150 per 1000')">Likes - Rs.150 per 1000</div>
+                <div class="service-option" onclick="selectService('youtube', 'Views - Rs.20 per 2000')">Views - Rs.20 per 2000</div>
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button class="btn-back neon-silver" onclick="goBackToStep1()">Back</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Quantity Input -->
+            <div class="step" id="step3_facebook">
+                <p style="font-weight: bold; margin-bottom: 1rem;">Facebook Boost</p>
+                <p id="facebookServiceDisplay"></p>
+                <input type="number" id="facebookQuantity" min="1" placeholder="Quantity" required>
+                <p class="total-amount">Total: <span id="facebookTotalAmount">Rs. 0</span></p>
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button class="btn-back neon-silver" onclick="goBackToStep2()">Back</button>
+                    <button class="btn-primary neon-silver" onclick="submitForm('facebook')">Submit</button>
+                </div>
+            </div>
+            <div class="step" id="step3_instagram">
+                <p style="font-weight: bold; margin-bottom: 1rem;">Instagram Boost</p>
+                <p id="instagramServiceDisplay"></p>
+                <input type="number" id="instagramQuantity" min="1" placeholder="Quantity" required>
+                <p class="total-amount">Total: <span id="instagramTotalAmount">Rs. 0</span></p>
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button class="btn-back neon-silver" onclick="goBackToStep2()">Back</button>
+                    <button class="btn-primary neon-silver" onclick="submitForm('instagram')">Submit</button>
+                </div>
+            </div>
+            <div class="step" id="step3_tiktok">
+                <p style="font-weight: bold; margin-bottom: 1rem;">TikTok Boost</p>
+                <p id="tiktokServiceDisplay"></p>
+                <input type="number" id="tiktokQuantity" min="1" placeholder="Quantity" required>
+                <p class="total-amount">Total: <span id="tiktokTotalAmount">Rs. 0</span></p>
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button class="btn-back neon-silver" onclick="goBackToStep2()">Back</button>
+                    <button class="btn-primary neon-silver" onclick="submitForm('tiktok')">Submit</button>
+                </div>
+            </div>
+            <div class="step" id="step3_youtube">
+                <p style="font-weight: bold; margin-bottom: 1rem;">YouTube Boost</p>
+                <p id="youtubeServiceDisplay"></p>
+                <input type="number" id="youtubeQuantity" min="1" placeholder="Quantity" required>
+                <p class="total-amount">Total: <span id="youtubeTotalAmount">Rs. 0</span></p>
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button class="btn-back neon-silver" onclick="goBackToStep2()">Back</button>
+                    <button class="btn-primary neon-silver" onclick="submitForm('youtube')">Submit</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Particle effect
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.animationDuration = Math.random() * 3 + 2 + 's';
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 5000);
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactBtn = document.getElementById('contactBtn');
+            const socialButtons = document.getElementById('socialButtons');
+            const socialBtns = socialButtons.querySelectorAll('.social-btn');
+            const boostBtn = document.getElementById('boostBtn');
+            const contactSection = document.getElementById('contactSection');
+            const boosterSection = document.getElementById('boosterSection');
+            const backToContactBtn = document.getElementById('backToContact');
 
-        setInterval(createParticle, 200);
+            // Background Animation
+            const animationContainer = document.getElementById('backgroundAnimation');
+            function createFloatingIcon(type) {
+                const icon = document.createElement('div');
+                icon.classList.add('floating-icon', type);
+                icon.innerHTML = type === 'likes' ? '<i class="fas fa-heart"></i>' :
+                                type === 'views' ? '<i class="fas fa-eye"></i>' :
+                                '<i class="fas fa-user-plus"></i>';
+                icon.style.left = Math.random() * 100 + 'vw';
+                icon.style.animationDelay = Math.random() * 3 + 's';
+                animationContainer.appendChild(icon);
+                setTimeout(() => icon.remove(), 6000);
+            }
 
-        // Button animation
-        const contactBtn = document.getElementById('contactBtn');
-        const socialButtons = document.getElementById('socialButtons');
-        const socialBtns = socialButtons.querySelectorAll('.social-btn');
+            setInterval(() => {
+                createFloatingIcon('likes');
+                createFloatingIcon('views');
+                createFloatingIcon('followers');
+            }, 1000);
 
-        contactBtn.addEventListener('click', () => {
-            contactBtn.classList.add('hidden');
-            socialButtons.classList.remove('hidden');
-            socialBtns.forEach((btn, index) => {
-                setTimeout(() => {
-                    btn.classList.add('show');
-                }, index * 100);
+            contactBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                socialButtons.style.display = socialButtons.style.display === 'none' ? 'block' : 'none';
+                socialBtns.forEach((btn, index) => {
+                    setTimeout(() => {
+                        btn.classList.toggle('show', socialButtons.style.display === 'block');
+                        if (socialButtons.style.display === 'block') {
+                            if (index === 0) {
+                                btn.classList.add('neon-green');
+                                btn.classList.remove('bg-emerald-600');
+                            } else {
+                                btn.classList.add('neon-pink');
+                                btn.classList.remove('bg-rose-600');
+                            }
+                        } else {
+                            btn.classList.remove('neon-green', 'neon-pink');
+                            if (index === 0) {
+                                btn.classList.add('bg-emerald-600');
+                            } else {
+                                btn.classList.add('bg-rose-600');
+                            }
+                        }
+                    }, index * 100);
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!socialButtons.contains(e.target) && !contactBtn.contains(e.target) && socialButtons.style.display === 'block') {
+                    socialButtons.style.display = 'none';
+                    socialBtns.forEach((btn, index) => {
+                        btn.classList.remove('show', 'neon-green', 'neon-pink');
+                        if (index === 0) {
+                            btn.classList.add('bg-emerald-600');
+                        } else {
+                            btn.classList.add('bg-rose-600');
+                        }
+                    });
+                }
+            });
+
+            boostBtn.addEventListener('click', () => {
+                contactSection.style.display = 'none';
+                boosterSection.classList.add('active');
+                resetForm();
+            });
+
+            backToContactBtn.addEventListener('click', () => {
+                boosterSection.classList.remove('active');
+                contactSection.style.display = 'block';
+                resetForm();
+            });
+
+            ['facebook', 'instagram', 'tiktok', 'youtube'].forEach(platform => {
+                const quantityInput = document.getElementById(`${platform}Quantity`);
+                if (quantityInput) {
+                    quantityInput.addEventListener('input', () => updateTotal(platform));
+                }
             });
         });
 
-        // Allow re-showing Contact Us button by clicking outside social buttons
-        document.addEventListener('click', (e) => {
-            if (!socialButtons.contains(e.target) && !contactBtn.contains(e.target) && !socialButtons.classList.contains('hidden')) {
-                socialBtns.forEach(btn => btn.classList.remove('show'));
-                setTimeout(() => {
-                    socialButtons.classList.add('hidden');
-                    contactBtn.classList.remove('hidden');
-                }, 300);
+        let selectedPlatform = '';
+        let selectedService = '';
+
+        function selectPlatform(platform) {
+            selectedPlatform = platform;
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.getElementById(`step2_${platform}`).classList.add('active');
+            document.querySelectorAll('.progress-step').forEach(step => {
+                step.classList.toggle('active', parseInt(step.dataset.step) <= 2);
+            });
+        }
+
+        function selectService(platform, service) {
+            selectedService = service;
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.getElementById(`step3_${platform}`).classList.add('active');
+            document.getElementById(`${platform}ServiceDisplay`).textContent = `Selected: ${service}`;
+            document.querySelectorAll('.progress-step').forEach(step => {
+                step.classList.toggle('active', parseInt(step.dataset.step) <= 3);
+            });
+        }
+
+        function goBackToStep1() {
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.getElementById('step1').classList.add('active');
+            document.querySelectorAll('.progress-step').forEach(step => {
+                step.classList.toggle('active', parseInt(step.dataset.step) <= 1);
+            });
+            resetForm();
+        }
+
+        function goBackToStep2() {
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.getElementById(`step2_${selectedPlatform}`).classList.add('active');
+            document.querySelectorAll('.progress-step').forEach(step => {
+                step.classList.toggle('active', parseInt(step.dataset.step) <= 2);
+            });
+        }
+
+        function updateTotal(platform) {
+            const quantityInput = document.getElementById(`${platform}Quantity`);
+            const totalSpan = document.getElementById(`${platform}TotalAmount`);
+            if (!quantityInput || !totalSpan) return;
+
+            const quantity = parseInt(quantityInput.value) || 0;
+            let costPerUnit = 0;
+
+            if (platform === 'facebook') {
+                costPerUnit = selectedService.includes('Views') ? 0.1 : 0.15;
+            } else if (platform === 'instagram') {
+                costPerUnit = selectedService.includes('Followers') ? 0.2 : 0.1;
+            } else if (platform === 'tiktok') {
+                costPerUnit = selectedService.includes('Followers') ? 0.5 : selectedService.includes('Likes') ? 0.1 : 0.005;
+            } else if (platform === 'youtube') {
+                costPerUnit = selectedService.includes('Subscribers') ? 1.0 : selectedService.includes('Likes') ? 0.15 : 0.01;
             }
-        });
+
+            const total = quantity * costPerUnit;
+            totalSpan.textContent = `Rs. ${total.toFixed(2)}`;
+        }
+
+        function submitForm(platform) {
+            const quantityInput = document.getElementById(`${platform}Quantity`);
+
+            if (!selectedService || !quantityInput.value) {
+                alert('Please select a service and enter quantity!');
+                return;
+            }
+
+            const quantity = quantityInput.value;
+            const total = document.getElementById(`${platform}TotalAmount`).textContent;
+
+            const message = `Boost Request\nPlatform: ${platform.charAt(0).toUpperCase() + platform.slice(1)}\nService: ${selectedService}\nQuantity: ${quantity}\nTotal: ${total}`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/+9779826660865?text=${encodedMessage}`, '_blank');
+
+            alert('Request sent to WhatsApp!');
+            document.getElementById('boosterSection').classList.remove('active');
+            document.getElementById('contactSection').style.display = 'block';
+            resetForm();
+        }
+
+        function resetForm() {
+            selectedPlatform = '';
+            selectedService = '';
+            ['facebook', 'instagram', 'tiktok', 'youtube'].forEach(platform => {
+                const quantityInput = document.getElementById(`${platform}Quantity`);
+                const serviceDisplay = document.getElementById(`${platform}ServiceDisplay`);
+                const totalSpan = document.getElementById(`${platform}TotalAmount`);
+                if (quantityInput) quantityInput.value = '';
+                if (serviceDisplay) serviceDisplay.textContent = '';
+                if (totalSpan) totalSpan.textContent = 'Rs. 0';
+            });
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.getElementById('step1').classList.add('active');
+            document.querySelectorAll('.progress-step').forEach(step => {
+                step.classList.toggle('active', parseInt(step.dataset.step) <= 1);
+            });
+        }
     </script>
 </body>
 </html>
