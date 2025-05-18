@@ -323,23 +323,25 @@
             <!-- Step 2: Service Selection -->
             <div class="step" id="step2_facebook">
                 <p style="font-weight: bold; margin-bottom: 1rem;">Facebook Boost</p>
-                <div class="service-option" onclick="selectService('facebook', 'Views - Rs.100 per 1000')">Views - Rs.100 per 1000</div>
-                <div class="service-option" onclick="selectService('facebook', 'Likes - Rs.150 per 1000')">Likes - Rs.150 per 1000</div>
+                <div class="service-option" onclick="selectService('facebook', 'Followers - Rs.600 per 1000')">Views - Rs.600 per 1000</div>
+                <div class="service-option" onclick="selectService('facebook', 'Likes - Rs.500 per 1000')"> Likes - Rs.500 per 1000</div>
+                <div class="service-option" onclick="selectService('facebook', 'Views - Rs.150 per 1000')"> Views - Rs.150 per 1000</div>
                 <div style="display: flex; justify-content: center; gap: 1rem;">
                     <button class="btn-back neon-silver" onclick="goBackToStep1()">Back</button>
                 </div>
             </div>
             <div class="step" id="step2_instagram">
                 <p style="font-weight: bold; margin-bottom: 1rem;">Instagram Boost</p>
-                <div class="service-option" onclick="selectService('instagram', 'Followers - Rs.200 per 1000')">Followers - Rs.200 per 1000</div>
+                <div class="service-option" onclick="selectService('instagram', 'Followers - Rs.600 per 1000')">Followers - Rs.600 per 1000</div>
                 <div class="service-option" onclick="selectService('instagram', 'Likes - Rs.100 per 1000')">Likes - Rs.100 per 1000</div>
+                <div class="service-option" onclick="selectService('instagram', 'Views - Rs.100 per 1000')">Views - Rs.10 per 1000</div>
                 <div style="display: flex; justify-content: center; gap: 1rem;">
                     <button class="btn-back neon-silver" onclick="goBackToStep1()">Back</button>
                 </div>
             </div>
             <div class="step" id="step2_tiktok">
                 <p style="font-weight: bold; margin-bottom: 1rem;">TikTok Boost</p>
-                <div class="service-option" onclick="selectService('tiktok', 'Followers - Rs.500 per 1000')">Followers - Rs.500 per 1000</div>
+                <div class="service-option" onclick="selectService('tiktok', 'Followers - Rs.500 per 1000')">Followers - Rs.600 per 1000</div>
                 <div class="service-option" onclick="selectService('tiktok', 'Likes - Rs.100 per 1000')">Likes - Rs.100 per 1000</div>
                 <div class="service-option" onclick="selectService('tiktok', 'Views - Rs.10 per 2000')">Views - Rs.10 per 2000</div>
                 <div style="display: flex; justify-content: center; gap: 1rem;">
@@ -348,9 +350,9 @@
             </div>
             <div class="step" id="step2_youtube">
                 <p style="font-weight: bold; margin-bottom: 1rem;">YouTube Boost</p>
-                <div class="service-option" onclick="selectService('youtube', 'Subscribers - Rs.1000 per 1000')">Subscribers - Rs.1000 per 1000</div>
-                <div class="service-option" onclick="selectService('youtube', 'Likes - Rs.150 per 1000')">Likes - Rs.150 per 1000</div>
-                <div class="service-option" onclick="selectService('youtube', 'Views - Rs.20 per 2000')">Views - Rs.20 per 2000</div>
+                <div class="service-option" onclick="selectService('youtube', 'Subscribers - Rs.600 per 1000')">Subscribers - Rs.600 per 1000</div>
+                <div class="service-option" onclick="selectService('youtube', 'Likes - Rs.500 per 1000')">Likes - Rs.500 per 1000</div>
+                
                 <div style="display: flex; justify-content: center; gap: 1rem;">
                     <button class="btn-back neon-silver" onclick="goBackToStep1()">Back</button>
                 </div>
@@ -515,13 +517,13 @@
             let costPerUnit = 0;
 
             if (platform === 'facebook') {
-                costPerUnit = selectedService.includes('Views') ? 0.1 : 0.15;
+                costPerUnit = selectedService.includes('Followers') ? 0.6 : selectedService.includes('Likes') ? 0.5 : 0.15;
             } else if (platform === 'instagram') {
-                costPerUnit = selectedService.includes('Followers') ? 0.2 : 0.1;
+                costPerUnit = selectedService.includes('Followers') ? 0.6 : selectedService.includes('Likes') ? 0.1 : 0.1;
             } else if (platform === 'tiktok') {
-                costPerUnit = selectedService.includes('Followers') ? 0.5 : selectedService.includes('Likes') ? 0.1 : 0.005;
+                costPerUnit = selectedService.includes('Followers') ? 0.6 : selectedService.includes('Likes') ? 0.1 : 0.01;
             } else if (platform === 'youtube') {
-                costPerUnit = selectedService.includes('Subscribers') ? 1.0 : selectedService.includes('Likes') ? 0.15 : 0.01;
+                costPerUnit = selectedService.includes('Subscribers') ? 0.6 : 0.5;
             }
 
             const total = quantity * costPerUnit;
